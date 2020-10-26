@@ -83,8 +83,8 @@ export default class ProductAdmin extends Component {
       <Fragment>
         <section className="section">
           <div className="container">
-            <h1>Administrador de productos</h1>
-            <p className="subtitle is-5">Agregue y elimine productos usando el formulario a continuación:</p>
+            <h1>Administrador de reparaciones</h1>
+            <p className="subtitle is-5">Agregue y elimine vehiculos usando el formulario a continuación:</p>
             <br />
             <div className="columns">
               <div className="column is-one-third">

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import FormErrors from "../FormErrors";
 import Validate from "../utility/FormValidation";
 import { Auth } from 'aws-amplify';
+import app from "../firebaseConfig";
 
 class ForgotPassword extends Component {
   state = {
@@ -15,7 +16,7 @@ class ForgotPassword extends Component {
   clearErrorState = () => {
     this.setState({
       errors: {
-        cognito: null,
+        auth: null,
         blankfield: false
       }
     });
@@ -33,13 +34,17 @@ class ForgotPassword extends Component {
       });
     }
 
-    // AWS Cognito integration here
-    try {
-      await Auth.forgotPassword(this.state.email);
-      this.props.history.push('/forgotpasswordverification');
-    }catch(error) {
-      console.log(error);
-    }
+    // Firebase Auth integration here
+
+    await app
+            .auth()
+            .sendPasswordResetEmail(this.state.email)
+            .then(result => {
+              this.props.history.push('/changepasswordconfirmation');
+            })
+            .catch(error => {
+              console.log(error);   
+            });
   }
 
   onInputChange = event => {

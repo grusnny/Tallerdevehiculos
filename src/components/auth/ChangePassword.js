@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import FormErrors from "../FormErrors";
 import Validate from "../utility/FormValidation";
 import { Auth } from 'aws-amplify';
+import app from "../firebaseConfig";
 
 class ChangePassword extends Component {
   state = {
@@ -55,6 +56,7 @@ class ChangePassword extends Component {
       });
       console.log(err);
     }
+
   }
 
   onInputChange = event => {

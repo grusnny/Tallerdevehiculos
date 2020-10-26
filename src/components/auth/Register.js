@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import FormErrors from "../FormErrors";
 import Validate from "../utility/FormValidation";
 import { Auth } from "aws-amplify";
+import app from "../firebaseConfig";
 
 class Register extends Component {
   state = {
@@ -10,7 +11,7 @@ class Register extends Component {
     password: "",
     confirmpassword: "",
     errors: {
-      cognito: null,
+      auth: null,
       blankfield: false,
       passwordmatch: false
     }
@@ -19,7 +20,7 @@ class Register extends Component {
   clearErrorState = () => {
     this.setState({
       errors: {
-        cognito: null,
+        auth: null,
         blankfield: false,
         passwordmatch: false
       }
@@ -38,28 +39,25 @@ class Register extends Component {
       });
     }
 
-    // AWS Cognito integration here
+    // Firebase Auth integration here
     const { username, email, password } = this.state;
-    try {
-      const signUpResponse = await Auth.signUp({
-        username,
-        password,
-        attributes: {
-          email: email
-        }
-      });
-      this.props.history.push("/welcome");
-      console.log(signUpResponse);
-    } catch (error) {
-      let err = null;
-      !error.message ? err = { "message": error } : err = error;
-      this.setState({
-        errors: {
-          ...this.state.errors,
-          cognito: err
-        }
-      });
-    }
+    await app
+            .auth()
+            .createUserWithEmailAndPassword(email, password)
+            .then(result => {
+                console.log(result);
+                this.props.history.push("/welcome");
+            })
+            .catch(error => {
+              let err = null;
+              !error.message ? err = { "message": error } : err = error;
+              this.setState({
+                errors: {
+                  ...this.state.errors,
+                  auth: err
+                }
+            });
+          });
   }
 
   onInputChange = event => {
@@ -73,7 +71,7 @@ class Register extends Component {
     return (
       <section className="section auth">
         <div className="container">
-          <h1>Register</h1>
+          <h1>Registro</h1>
           <FormErrors formerrors={this.state.errors} />
 
           <form onSubmit={this.handleSubmit}>

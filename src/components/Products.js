@@ -31,7 +31,7 @@ export default class Products extends Component {
       <Fragment>
         <section className="section">
           <div className="container">
-            <h1>Servicios para el hogar</h1>
+            <h1>Servicios de reparación</h1>
             <p className="subtitle is-5">Invierta en un futuro más facil, con nuestros servicios:</p>
             <br />
             <div className="columns">

@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import FormErrors from "../FormErrors";
 import Validate from "../utility/FormValidation";
 import { Auth } from "aws-amplify";
+import app from "../firebaseConfig";
 
 class LogIn extends Component {
   state = {
     username: "",
     password: "",
     errors: {
-      cognito: null,
+      auth: null,
       blankfield: false
     }
   };
@@ -16,7 +17,7 @@ class LogIn extends Component {
   clearErrorState = () => {
     this.setState({
       errors: {
-        cognito: null,
+        auth: null,
         blankfield: false
       }
     });
@@ -34,23 +35,26 @@ class LogIn extends Component {
       });
     }
 
-    // AWS Cognito integration here
-    try {
-      const user = await Auth.signIn(this.state.username, this.state.password);
-      console.log(user);
-      this.props.auth.setAuthStatus(true);
-      this.props.auth.setUser(user);
-      this.props.history.push("/");
-    }catch(error) {
-      let err = null;
-      !error.message ? err = { "message": error } : err = error;
-      this.setState({
-        errors: {
-          ...this.state.errors,
-          cognito: err
-        }
-      });
-    }
+    // Firebase Auth integration here
+     await app
+            .auth()
+            .signInWithEmailAndPassword(this.state.username, this.state.password)
+            .then(result => {
+                console.log(result);
+                this.props.auth.setAuthStatus(true);
+                this.props.auth.setUser(result.user);
+                this.props.history.push("/");
+            })
+            .catch(error => {
+              let err = null;
+              !error.message ? err = { "message": error } : err = error;
+              this.setState({
+                errors: {
+                  ...this.state.errors,
+                  auth: err
+                }
+            });    
+            });
   };
 
   onInputChange = event => {
@@ -64,7 +68,7 @@ class LogIn extends Component {
     return (
       <section className="section auth">
         <div className="container">
-          <h1>Log in</h1>
+          <h1>Iniciar sesión</h1>
           <FormErrors formerrors={this.state.errors} />
 
           <form onSubmit={this.handleSubmit}>

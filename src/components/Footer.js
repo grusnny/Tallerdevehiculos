@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="content has-text-centered">
         <p>
-          Ayuda en Casa 2020.
+          Ingenieria web 2020.
         </p>
       </div>
     </footer>

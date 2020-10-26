@@ -1,20 +1,25 @@
 import React, { Component } from 'react';
 import { Auth } from 'aws-amplify';
+import app from "./firebaseConfig";
 
 export default class Navbar extends Component {
   handleLogOut = async event => {
     event.preventDefault();
-    try {
-      Auth.signOut();
-      this.props.auth.setAuthStatus(false);
-      this.props.auth.setUser(null);
-    }catch(error) {
-      console.log(error.message);
-    }
+    await app
+            .auth()
+            .signOut()
+            .then(result => {
+                console.log(result);
+                this.props.auth.setAuthStatus(false);
+                this.props.auth.setUser(null);
+            })
+            .catch(error => {
+              console.log(error);   
+            });
   }
   render() {
     return (
-      <nav className="navbar" role="navigation" aria-label="main navigation">
+      <nav className="navbar is-link" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
           <a className="navbar-item" href="/">
             <img src="Logo.png" width="112" height="34" alt="hexal logo" />
@@ -30,7 +35,7 @@ export default class Navbar extends Component {
               Servicios
             </a>
             <a href="/admin" className="navbar-item">
-              Mi Perfil
+              Perfil
             </a>
           </div>
 
@@ -38,13 +43,13 @@ export default class Navbar extends Component {
             <div className="navbar-item">
               {this.props.auth.isAuthenticated && this.props.auth.user && (
                 <p>
-                  Hola {this.props.auth.user.username}
+                  Hola {this.props.auth.user.email}
                 </p>
               )}
               <div className="buttons">
                 {!this.props.auth.isAuthenticated && (
                   <div>
-                    <a href="/register" className="button is-primary">
+                    <a href="/register" className="button is-info">
                       <strong>Registrar</strong>
                     </a>
                     <a href="/login" className="button is-light">

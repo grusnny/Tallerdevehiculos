@@ -8,7 +8,7 @@ export default function Home() {
       <Hero />
       <div className="box cta">
         <p className="has-text-centered">
-          <span className="tag is-primary">Nuevos</span> Servicios cada dia en tu ciudad!.
+          <span className="tag is-info">Nuevos</span> ¡Servicios cada dia en tu ciudad!.
         </p>
       </div>
       <HomeContent />
