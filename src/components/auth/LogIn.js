@@ -3,6 +3,8 @@ import FormErrors from "../FormErrors";
 import Validate from "../utility/FormValidation";
 import { Auth } from "aws-amplify";
 import app from "../firebaseConfig";
+import * as firebase from "firebase";
+import "firebase/auth";
 
 class LogIn extends Component {
   state = {
@@ -36,11 +38,25 @@ class LogIn extends Component {
     }
 
     // Firebase Auth integration here
-     await app
+
+    app.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+  .then(function() {
+    // Existing and future Auth states are now persisted in the current
+    // session only. Closing the window would clear any existing state even
+    // if a user forgets to sign out.
+    // ...
+    // New sign-in will be persisted with session persistence.
+    return app.auth().signInWithEmailAndPassword(this.state.username, this.state.password);
+  })
+  .catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+  });
+    await app
             .auth()
             .signInWithEmailAndPassword(this.state.username, this.state.password)
             .then(result => {
-                console.log(result);
                 this.props.auth.setAuthStatus(true);
                 this.props.auth.setUser(result.user);
                 this.props.history.push("/");

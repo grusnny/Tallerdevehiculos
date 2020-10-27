@@ -16,6 +16,7 @@ import Footer from './components/Footer';
 import { Auth } from 'aws-amplify';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import app from "./components/firebaseConfig";
 library.add(faEdit);
 
 class App extends Component {
@@ -33,21 +34,30 @@ class App extends Component {
   setUser = user => {
     this.setState({ user: user });
   }
-
   async componentDidMount() {
+    let isAuth=false;
+    let user=null;
+
     try {
-      const session = await Auth.currentSession();
-      this.setAuthStatus(true);
-      console.log(session);
-      const user = await Auth.currentAuthenticatedUser();
-      this.setUser(user);
-    } catch(error) {
-      if (error !== 'No current user') {
+      app.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          console.log("OnAuthStateChanged")
+          console.log(app.auth().currentUser)
+          localStorage.setItem('AuthStatus', JSON.stringify(true));
+          localStorage.setItem('User', JSON.stringify(app.auth().currentUser));
+        }else{
+          localStorage.setItem('AuthStatus', JSON.stringify(false));
+          localStorage.setItem('User', JSON.stringify(null));
+        }
+      }); 
+    } catch (error) {
         console.log(error);
-      }
     }
-  
+
+    this.setAuthStatus(JSON.parse(localStorage.getItem('AuthStatus'))); 
+    this.setUser(JSON.parse(localStorage.getItem('User')));
     this.setState({ isAuthenticating: false });
+
   }
 
   render() {
