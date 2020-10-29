@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Auth } from 'aws-amplify';
 import app from "./firebaseConfig";
 
 export default class Navbar extends Component {
@@ -9,7 +8,6 @@ export default class Navbar extends Component {
             .auth()
             .signOut()
             .then(result => {
-                console.log("Estoy actualizando");
                 this.props.auth.setAuthStatus(false);
                 this.props.auth.setUser(null);
             })

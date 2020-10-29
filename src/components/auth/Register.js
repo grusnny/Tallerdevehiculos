@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import FormErrors from "../FormErrors";
 import Validate from "../utility/FormValidation";
-import { Auth } from "aws-amplify";
 import app from "../firebaseConfig";
 
 class Register extends Component {
@@ -132,11 +131,6 @@ class Register extends Component {
                 <span className="icon is-small is-left">
                   <i className="fas fa-lock"></i>
                 </span>
-              </p>
-            </div>
-            <div className="field">
-              <p className="control">
-                <a href="/forgotpassword">¿Olvidó la contraseña?</a>
               </p>
             </div>
             <div className="field">

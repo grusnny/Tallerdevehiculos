@@ -23,11 +23,11 @@ function FormErrors(props) {
         <div className="row justify-content-center">{props.apierrors}</div>
       </div>
     );
-  } else if (props.formerrors && props.formerrors.cognito) {
+  } else if (props.formerrors && props.formerrors.auth) {
     return (
       <div className="error container help is-danger">
         <div className="row justify-content-center">
-          {props.formerrors.cognito.message}
+          {props.formerrors.auth.message}
         </div>
       </div>
     );
