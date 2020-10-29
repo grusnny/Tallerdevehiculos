@@ -15,11 +15,21 @@ import Welcome from './components/auth/Welcome';
 import Footer from './components/Footer';
 import { Auth } from 'aws-amplify';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faLessThanEqual } from '@fortawesome/free-solid-svg-icons';
 import app from "./components/firebaseConfig";
 library.add(faEdit);
 
 class App extends Component {
+  constructor(props) {
+
+    super(props)
+    this.state = {
+      isAuthenticated: false,
+      isAuthenticating: true,
+      user: null
+    }
+    
+  }
 
   state = {
     isAuthenticated: false,
@@ -34,29 +44,31 @@ class App extends Component {
   setUser = user => {
     this.setState({ user: user });
   }
-  async componentDidMount() {
-    let isAuth=false;
-    let user=null;
+  
+  componentDidMount() {
 
-    try {
-      app.auth().onAuthStateChanged(function(user) {
+    app.auth().onAuthStateChanged(function(user) {
         if (user) {
-          console.log("OnAuthStateChanged")
-          console.log(app.auth().currentUser)
+          this.setState({isAuthenticated:true}); 
+          this.setState({user:app.auth().currentUser});
+          this.setState({ isAuthenticating: false });
+
           localStorage.setItem('AuthStatus', JSON.stringify(true));
           localStorage.setItem('User', JSON.stringify(app.auth().currentUser));
         }else{
           localStorage.setItem('AuthStatus', JSON.stringify(false));
           localStorage.setItem('User', JSON.stringify(null));
-        }
-      }); 
-    } catch (error) {
-        console.log(error);
-    }
 
-    this.setAuthStatus(JSON.parse(localStorage.getItem('AuthStatus'))); 
-    this.setUser(JSON.parse(localStorage.getItem('User')));
-    this.setState({ isAuthenticating: false });
+          this.setState({isAuthenticated:false}); 
+          this.setState({user:null});
+          this.setState({isAuthenticating: false});
+        }
+      }).bind(this);
+
+
+    // this.setAuthStatus(JSON.parse(localStorage.getItem('AuthStatus'))); 
+    // this.setUser(JSON.parse(localStorage.getItem('User')));
+    // this.setState({ isAuthenticating: false });
 
   }
 
