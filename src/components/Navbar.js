@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Auth } from 'aws-amplify';
 import app from "./firebaseConfig";
 
 export default class Navbar extends Component {

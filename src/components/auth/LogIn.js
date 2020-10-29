@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import FormErrors from "../FormErrors";
 import Validate from "../utility/FormValidation";
-import { Auth } from "aws-amplify";
 import app from "../firebaseConfig";
 import * as firebase from "firebase";
 import "firebase/auth";
@@ -50,8 +49,6 @@ class LogIn extends Component {
   })
   .catch(function(error) {
     // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
   });
     await app
             .auth()
@@ -62,7 +59,6 @@ class LogIn extends Component {
                 this.props.history.push("/");
             })
             .catch(error => {
-              let object=JSON.stringify(error) 
               let err = null;
               !error.message ? err = { "message": error} : err = error;
               this.setState({
@@ -116,11 +112,6 @@ class LogIn extends Component {
                 <span className="icon is-small is-left">
                   <i className="fas fa-lock"></i>
                 </span>
-              </p>
-            </div>
-            <div className="field">
-              <p className="control">
-                <a href="/forgotpassword">¿Olvidó la contraseña?</a>
               </p>
             </div>
             <div className="field">

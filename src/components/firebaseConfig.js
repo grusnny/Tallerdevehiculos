@@ -1,7 +1,8 @@
-import * as firebase from "firebase";
+
 import "firebase/auth";
-//import dataConfig from './dataConfig'
-const app = firebase.initializeApp(
+const firebase = require('firebase')
+
+const config =
     {
         apiKey: "AIzaSyAk37kYLM7qXK6dMmtX97XV9BzzM-NNEyI",
         authDomain: "taller-de-vehiculos.firebaseapp.com",
@@ -11,8 +12,7 @@ const app = firebase.initializeApp(
         messagingSenderId: "1000338854361",
         appId: "1:1000338854361:web:175f3c6bb5139d190049c8",
         measurementId: "G-0L84KQ10YW"
-    }
-);
-
-
-export default app;
+    };
+    const app = firebase.initializeApp(config);
+    
+    export default app;
