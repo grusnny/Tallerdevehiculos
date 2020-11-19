@@ -5,8 +5,8 @@ class ChangePasswordConfirmation extends Component {
     return (
       <section className="section auth">
         <div className="container">
-          <h1>Cambiar contraseña</h1>
-          <p>¡Hemos enviado un correo con un link para reestablecer tu contraseña!</p>
+          <h1>Change Password</h1>
+          <p>We have sent an email with a link to reset your password!</p>
         </div>
       </section>
     );

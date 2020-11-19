@@ -4,8 +4,8 @@ export default function Welcome() {
   return (
     <section className="section auth">
       <div className="container">
-        <h1>!Bienvenido!</h1>
-        <p>Ha registrado con éxito una nueva cuenta.</p>
+        <h1>Welcome!</h1>
+        <p>You have successfully registered a new account.</p>
         <p></p>
       </div>
     </section>

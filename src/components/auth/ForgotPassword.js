@@ -57,10 +57,10 @@ class ForgotPassword extends Component {
     return (
       <section className="section auth">
         <div className="container">
-          <h1>Olvidaste la contraseña?</h1>
+          <h1>Forgot your password?</h1>
           <p>
-          Porfavor ingresa el correo asociado a tu cuenta y te enviaremos un mensaje
-          con un link para su reinicio.
+          Please enter the email address associated with your account and we'll
+          email you a password reset link.
           </p>
           <FormErrors formerrors={this.state.errors} />
 
@@ -72,7 +72,7 @@ class ForgotPassword extends Component {
                   className="input"
                   id="email"
                   aria-describedby="emailHelp"
-                  placeholder="Ingrese correo"
+                  placeholder="Enter email"
                   value={this.state.email}
                   onChange={this.onInputChange}
                 />
@@ -83,13 +83,13 @@ class ForgotPassword extends Component {
             </div>
             <div className="field">
               <p className="control">
-                <a href="/forgotpassword">¿Olvidó la contraseña?</a>
+                <a href="/forgotpassword">Forgot password?</a>
               </p>
             </div>
             <div className="field">
               <p className="control">
                 <button className="button is-success">
-                  Enviar
+                  Login
                 </button>
               </p>
             </div>
