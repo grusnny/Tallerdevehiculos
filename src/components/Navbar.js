@@ -30,10 +30,10 @@ export default class Navbar extends Component {
               Home
             </a>
             <a href="/products" className="navbar-item">
-              Servicios
+              Services
             </a>
             <a href="/admin" className="navbar-item">
-              Perfil
+              Profile
             </a>
           </div>
 
@@ -41,23 +41,23 @@ export default class Navbar extends Component {
             <div className="navbar-item">
               {this.props.auth.isAuthenticated && this.props.auth.user && (
                 <p>
-                  Hola {this.props.auth.user.email}
+                  Hi {this.props.auth.user.email}
                 </p>
               )}
               <div className="buttons">
                 {!this.props.auth.isAuthenticated && (
                   <div>
                     <a href="/register" className="button is-info">
-                      <strong>Registrar</strong>
+                      <strong>Register</strong>
                     </a>
                     <a href="/login" className="button is-light">
-                      Iniciar sesión
+                      Log in
                     </a>
                   </div>
                 )}
                 {this.props.auth.isAuthenticated && (
                   <a href="/" onClick={this.handleLogOut} className="button is-light">
-                    Cerrar sesión
+                    Log out
                   </a>
                 )}
               </div>

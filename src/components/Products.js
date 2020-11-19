@@ -31,8 +31,8 @@ export default class Products extends Component {
       <Fragment>
         <section className="section">
           <div className="container">
-            <h1>Servicios de reparación</h1>
-            <p className="subtitle is-5">Invierta en un futuro más facil, con nuestros servicios:</p>
+            <h1>Repair services</h1>
+            <p className="subtitle is-5">Invest in an easier future, with our services:</p>
             <br />
             <div className="columns">
               <div className="column">
@@ -41,7 +41,7 @@ export default class Products extends Component {
                     { 
                       this.state.products && this.state.products.length > 0
                       ? this.state.products.map(product => <Product name={product.productname} id={product.id} key={product.id} />)
-                      : <div className="tile notification is-warning">En el momento no hay servicios</div>
+                      : <div className="tile notification is-warning">At the moment there are no services</div>
                     }
                   </div>
                 </div>

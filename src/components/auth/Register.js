@@ -70,7 +70,7 @@ class Register extends Component {
     return (
       <section className="section auth">
         <div className="container">
-          <h1>Registro</h1>
+          <h1>Register</h1>
           <FormErrors formerrors={this.state.errors} />
 
           <form onSubmit={this.handleSubmit}>
@@ -81,7 +81,7 @@ class Register extends Component {
                   type="text"
                   id="username"
                   aria-describedby="userNameHelp"
-                  placeholder="Ingrese nombre de usuario"
+                  placeholder="Enter username"
                   value={this.state.username}
                   onChange={this.onInputChange}
                 />
@@ -94,7 +94,7 @@ class Register extends Component {
                   type="email"
                   id="email"
                   aria-describedby="emailHelp"
-                  placeholder="Ingrese correo"
+                  placeholder="Enter email"
                   value={this.state.email}
                   onChange={this.onInputChange}
                 />
@@ -109,7 +109,7 @@ class Register extends Component {
                   className="input" 
                   type="password"
                   id="password"
-                  placeholder="Contraseña"
+                  placeholder="Password"
                   value={this.state.password}
                   onChange={this.onInputChange}
                 />
@@ -124,7 +124,7 @@ class Register extends Component {
                   className="input" 
                   type="password"
                   id="confirmpassword"
-                  placeholder="Confirmar contraseña"
+                  placeholder="Confirm password"
                   value={this.state.confirmpassword}
                   onChange={this.onInputChange}
                 />
@@ -136,7 +136,7 @@ class Register extends Component {
             <div className="field">
               <p className="control">
                 <button className="button is-success">
-                  Registrar
+                  Register
                 </button>
               </p>
             </div>

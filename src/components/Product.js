@@ -36,7 +36,7 @@ export default class ProductAdmin extends Component {
         {
           this.state.isEditMode 
           ? <div>
-              <p>Editar el nombre del producto</p>
+              <p>Edit product name</p>
               <input 
                 className="input is-medium"
                 type="text" 
