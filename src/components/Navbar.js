@@ -23,20 +23,33 @@ export default class Navbar extends Component {
             <img src="Logo.png" width="80" height="14" alt="hexal logo" />
           </a>
         </div>
-
         <div id="navbarBasicExample" className="navbar-menu">
           <div className="navbar-start">
-            <a href="/" className="navbar-item">
-              Home
-            </a>
-            <a href="/products" className="navbar-item">
-              Services
-            </a>
-            <a href="/admin" className="navbar-item">
-              Profile
-            </a>
-          </div>
 
+            {this.props.auth.isAuthenticated && (
+              <a href="/admin" className="navbar-item">
+                Profile
+              </a>
+            )}
+            {this.props.auth.isAuthenticated && (
+              <a href="/" className="navbar-item">
+                Home
+              </a>
+            )}
+            {this.props.auth.isAuthenticated && (
+              <a href="/products" className="navbar-item">
+                Services
+              </a>
+            )}
+
+            {this.props.auth.isAuthenticated && (
+              <a href="/carlist" className="navbar-item">
+                Cars List
+              </a>
+            )}
+            
+            
+          </div>
           <div className="navbar-end">
             <div className="navbar-item">
               {this.props.auth.isAuthenticated && this.props.auth.user && (

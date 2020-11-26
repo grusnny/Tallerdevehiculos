@@ -84,8 +84,8 @@ class App extends Component {
               <Route exact path="/changepassword" render={(props) => <ChangePassword {...props} auth={authProps} />} />
               <Route exact path="/changepasswordconfirmation" render={(props) => <ChangePasswordConfirm {...props} auth={authProps} />} />
               <Route exact path="/welcome" render={(props) => <Welcome {...props} auth={authProps} />} />
+              <Route exact path="/carlist" render={(props) => <ListVehicle {...props} auth ={authProps} />} />
             </Switch>
-            <ListVehicle />
             <Footer />
           </div>
         </Router>

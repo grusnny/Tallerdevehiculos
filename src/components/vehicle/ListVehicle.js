@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CardVehicle from './CardVehicle';
 
 export default class ListVehicle extends Component {
     constructor(props) {
@@ -10,8 +11,9 @@ export default class ListVehicle extends Component {
     render() {
         return (
             <div>
-                Hola, esta es la lista de vehiculos.
+                <CardVehicle/>
             </div>
+            
         );
     }
 }
