@@ -1,22 +1,27 @@
 import React, { Component } from 'react';
 import CardVehicle from './CardVehicle';
 import firebase from 'firebase';
-import { CardColumns } from 'react-bootstrap';
+import { getAllVehicles } from '../../services/vehicles';
 
 export default class ListVehicle extends Component {
     constructor(props) {
         super(props)
         this.state = {
             cars: [],
-            update: false
+            update: false,
+            cars2: []
         }
     }
 
     async componentDidMount(){
-        await this.getCarList();
+        getAllVehicles().then((responseJson) => {
+            this.setState({
+                cars: responseJson
+            })
+        });
     }
 
-    getCarList(){
+    /*getCarList(){
         this.setState({
             update:true
         });
@@ -36,7 +41,7 @@ export default class ListVehicle extends Component {
                 })
             });
         }.bind(this))
-    }
+    }*/
 
 
 
