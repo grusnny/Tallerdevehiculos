@@ -44,7 +44,7 @@ export default class Navbar extends Component {
 
             {this.props.auth.isAuthenticated && (
               <a href="/carlist" className="navbar-item">
-                Cars List
+                Car List
               </a>
             )}
             

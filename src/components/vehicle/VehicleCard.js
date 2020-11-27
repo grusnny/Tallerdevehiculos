@@ -36,22 +36,22 @@ export default class CardVehicle extends Component {
     render() {
         return (
                 
-            <Card style={{margin: 10, width: '20rem'}}>
-                <Card.Header> Placa: {this.props.data.licensePlate}</Card.Header>
+            <Card border={'dark'} style={{margin: 10, width: '20rem'}}>
+                <Card.Header as="h6" style={{backgroundColor: '#BAE4FF', color: 'black'}}> Placa: {this.props.data.licensePlate}</Card.Header>
                 <ListGroup variant="flush">
                     <ListGroup.Item>
                         <div>
-                            Propietario: 
+                            <b>Propietario:</b> 
                             <Card.Link onClick={()=>this.setModalUserShow(true)}> {this.props.data.owner.name}</Card.Link>
                         </div>
-                        <div>Color: {this.props.data.color}</div>
-                        <div>Marca: {this.props.data.mark}</div>
+                        <div><b>Color:</b> {this.props.data.color}</div>
+                        <div><b>Marca:</b> {this.props.data.mark}</div>
                     
-                        <div>Tipo: {this.props.data.type}</div>
-                        <div>Modelo: {this.props.data.modelNumber}</div>
-                        <div>Fecha de admision: {this.props.data.admissionDate}</div>
+                        <div><b>Tipo:</b> {this.props.data.type}</div>
+                        <div><b>Modelo:</b> {this.props.data.modelNumber}</div>
+                        <div><b>Fecha de admision:</b> {this.props.data.admissionDate}</div>
                     
-                        <div>Historial:
+                        <div><b>Historial:</b>
                             <Card.Link onClick={() => this.getRepairHistory(this.props.data.licensePlate)}> ver mas</Card.Link>
                         </div>
                     </ListGroup.Item>
