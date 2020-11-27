@@ -3,6 +3,8 @@ const REQUEST_API = API + '/repairs';
 
 var headers = new Headers();
 headers.append('Content-Type', 'application/json');
+headers.append('Accept', 'application/json');
+
 
 var requestOptionsGet = {
     method: 'GET',

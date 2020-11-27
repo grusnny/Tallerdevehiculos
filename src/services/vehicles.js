@@ -3,6 +3,7 @@ const REQUEST_API = API + '/vehicles';
 
 var headers = new Headers();
 headers.append('Content-Type', 'application/json');
+headers.append('Accept', 'application/json');
 
 var requestOptionsGet = {
     method: 'GET',
@@ -28,8 +29,8 @@ async function deleteVehicle(request = {}) {
         body: request,
         redirect: 'follow'
       })
-
-    return response.json();
+    console.log(response.json);
+    //return response.json();
 } 
 
 async function getVehicleById(id = "") {

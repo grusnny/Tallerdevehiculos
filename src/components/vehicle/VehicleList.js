@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import VehicleCard from './VehicleCard';
-import { getAllVehicles } from '../../services/vehicles';
+import { deleteVehicle, getAllVehicles } from '../../services/vehicles';
+import { FloatingButton, Item } from "react-floating-button";
+import AddNew from '../utility/images/AddIcon.jpg';
 
 export default class ListVehicle extends Component {
     constructor(props) {
@@ -48,9 +50,24 @@ export default class ListVehicle extends Component {
         return (
             <div style={{display: 'flex', flexDirection: 'row'}}>
                 {this.state.cars.map(car => 
-                    <VehicleCard key={car.licensePlate} data = {car} />
+                    <VehicleCard callback={(value) => this.delete(value)} key={car.licensePlate} data = {car} />
                 )}
+                <FloatingButton
+                >
+                <Item
+                    imgSrc={AddNew}
+                    backgroundColor='#3265CE'
+                    onClick={() => {
+                    console.log("callback function here");
+                    }}
+                />
+                </FloatingButton>
             </div>
         );
+    }
+
+    delete(value){
+        deleteVehicle(JSON.stringify(value));
+        window.location.reload();
     }
 }
