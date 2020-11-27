@@ -16,7 +16,7 @@ import Footer from './components/Footer'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEdit} from '@fortawesome/free-solid-svg-icons';
 import app from "./components/firebaseConfig";
-import ListVehicle from './components/vehicle/ListVehicle';
+import VehicleList from './components/vehicle/VehicleList';
 
 
 library.add(faEdit);
@@ -84,7 +84,7 @@ class App extends Component {
               <Route exact path="/changepassword" render={(props) => <ChangePassword {...props} auth={authProps} />} />
               <Route exact path="/changepasswordconfirmation" render={(props) => <ChangePasswordConfirm {...props} auth={authProps} />} />
               <Route exact path="/welcome" render={(props) => <Welcome {...props} auth={authProps} />} />
-              <Route exact path="/carlist" render={(props) => <ListVehicle {...props} auth ={authProps} />} />
+              <Route exact path="/carlist" render={(props) => <VehicleList {...props} auth ={authProps} />} />
             </Switch>
             <Footer />
           </div>

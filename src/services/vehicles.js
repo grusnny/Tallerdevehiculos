@@ -52,7 +52,7 @@ async function postVehicle(request = {}) {
 
 async function getAllVehicles() {
 
-    const response = await fetch('https://run.mocky.io/v3/fe451829-1cf8-4f3d-a790-9be0ffba4765', requestOptionsGet)
+    const response = await fetch(REQUEST_API, requestOptionsGet)
     return response.json(); 
 
 }   

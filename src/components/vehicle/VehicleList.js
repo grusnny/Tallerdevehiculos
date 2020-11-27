@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import CardVehicle from './CardVehicle';
-import firebase from 'firebase';
+import VehicleCard from './VehicleCard';
 import { getAllVehicles } from '../../services/vehicles';
 
 export default class ListVehicle extends Component {
@@ -14,7 +13,7 @@ export default class ListVehicle extends Component {
     }
 
     async componentDidMount(){
-        getAllVehicles().then((responseJson) => {
+        await getAllVehicles().then((responseJson) => {
             this.setState({
                 cars: responseJson
             })
@@ -49,7 +48,7 @@ export default class ListVehicle extends Component {
         return (
             <div style={{display: 'flex', flexDirection: 'row'}}>
                 {this.state.cars.map(car => 
-                    <CardVehicle data = {car} />
+                    <VehicleCard key={car.licensePlate} data = {car} />
                 )}
             </div>
         );

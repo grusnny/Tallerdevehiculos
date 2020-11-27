@@ -37,7 +37,14 @@ async function getRepairById(id = "") {
     const response = await fetch(REQUEST_API+"/"+id, requestOptionsGet)
     return response.json(); 
 
-} 
+}
+
+async function getRepairByLicensePlate(id =""){
+    const response = await fetch(REQUEST_API+"/licenseplate/"+id, requestOptionsGet);
+    return response.json();
+
+
+}
 
 async function postRepair(request = {}) {
     const response = await fetch(REQUEST_API, {
@@ -57,4 +64,4 @@ async function getAllRepairs() {
 
 }   
 
-export {getAllRepairs,getRepairById,postRepair,updateRepair,deleteRepair}
+export {getAllRepairs,getRepairById,postRepair,updateRepair,deleteRepair, getRepairByLicensePlate}
