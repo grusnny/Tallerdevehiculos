@@ -5,7 +5,7 @@ export default function OwnerModal(props) {
     return (
       <Modal
         {...props}
-        size="lg"
+        size="sm"
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >

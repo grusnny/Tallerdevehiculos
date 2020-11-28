@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {Button, Card, ListGroup} from 'react-bootstrap';
 import OwnerModal from '../owner/OwnerModal';
 import { getRepairByLicensePlate } from '../../services/repairs';
-import { deleteVehicle } from '../../services/vehicles';
 import RepairModal from '../repair/RepairModal';
 import DeleteAsk from '../DeleteAsk';
 

@@ -3,13 +3,14 @@ import VehicleCard from './VehicleCard';
 import { deleteVehicle, getAllVehicles } from '../../services/vehicles';
 import { FloatingButton, Item } from "react-floating-button";
 import AddNew from '../utility/images/AddIcon.jpg';
+import AddNewVehicle from './AddNewVehicle';
 
 export default class ListVehicle extends Component {
     constructor(props) {
         super(props)
         this.state = {
             cars: [],
-            update: false,
+            isOpenNewCar: false,
             cars2: []
         }
     }
@@ -22,30 +23,6 @@ export default class ListVehicle extends Component {
         });
     }
 
-    /*getCarList(){
-        this.setState({
-            update:true
-        });
-        firebase.auth().currentUser.getIdToken(true).then(function(idToken) {
-            const url = 'https://run.mocky.io/v3/513fe8c4-4e1a-42d4-927e-14857a88b8b3';
-            fetch(url, {
-                method: 'GET',
-                headers: new Headers({
-                    'Content-type': 'application/json',
-                    'idToken': idToken,
-                }),
-            }).then((Response) => Response.json())
-            .then((ResponseJson) => {
-                this.setState({
-                    update:false,
-                    cars: ResponseJson
-                })
-            });
-        }.bind(this))
-    }*/
-
-
-
     render() {
         return (
             <div style={{display: 'flex', flexDirection: 'row'}}>
@@ -57,11 +34,10 @@ export default class ListVehicle extends Component {
                 <Item
                     imgSrc={AddNew}
                     backgroundColor='#3265CE'
-                    onClick={() => {
-                    console.log("callback function here");
-                    }}
+                    onClick={() => this.setAddNewModal(true)}
                 />
                 </FloatingButton>
+                <AddNewVehicle show={this.state.isOpenNewCar} onHide={()=>this.setAddNewModal(false)} />
             </div>
         );
     }
@@ -69,5 +45,11 @@ export default class ListVehicle extends Component {
     delete(value){
         deleteVehicle(JSON.stringify(value));
         window.location.reload();
+    }
+
+    setAddNewModal(value){
+        this.setState({
+            isOpenNewCar:value
+        })
     }
 }
