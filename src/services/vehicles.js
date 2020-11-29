@@ -1,4 +1,4 @@
-const API = 'https://tallervehiculosdynamodb.herokuapp.com';
+const API = 'https://workshoprepairsfirebase.herokuapp.com';
 const REQUEST_API = API + '/vehicles';
 
 var headers = new Headers();

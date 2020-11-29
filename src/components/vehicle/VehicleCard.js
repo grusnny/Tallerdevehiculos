@@ -34,11 +34,11 @@ export default class CardVehicle extends Component {
                         <div><b>Fecha de admision:</b> {this.props.data.admissionDate}</div>
                     
                         <div><b>Historial:</b>
-                            <Card.Link onClick={() => this.getRepairHistory(this.props.data.licensePlate)}> ver mas</Card.Link>
+                            <Card.Link onClick={() => this.getRepairHistory(this.props.data.licensePlate)}> Ver</Card.Link>
                         </div>
                     </ListGroup.Item>
                     <Card.Footer>
-                        <Button variant="primary" size="sm" >Edit</Button>
+                        <Button variant="primary" style={{marginRight: '10px'}} size="sm" >Edit</Button>
                         <Button onClick={()=>this.setModalDeleteShow(true)} variant="danger" size="sm" >Delete</Button>
                     </Card.Footer>
                 </ListGroup>

@@ -10,7 +10,7 @@ export default function RepairModal(props) {
             aria-labelledby="contained-modal-title-vcenter"
             centered
         >
-            <Modal.Header closeButton>
+            <Modal.Header style={{backgroundColor: '#BAE4FF'}} closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
                 Reparaciones
             </Modal.Title>
