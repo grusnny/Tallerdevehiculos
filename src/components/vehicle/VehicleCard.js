@@ -18,7 +18,7 @@ export default class CardVehicle extends Component {
 
     render() {
         return (
-            <Card border={'dark'} style={{margin: 10, width: '20rem'}}>
+            <Card border={'dark'} style={{margin: 10, width: 'auto'}}>
                 <Card.Header as="h6" style={{backgroundColor: '#BAE4FF', color: 'black'}}> Placa: {this.props.data.licensePlate}</Card.Header>
                 <ListGroup variant="flush">
                     <ListGroup.Item>

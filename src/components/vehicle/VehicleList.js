@@ -4,6 +4,7 @@ import { deleteVehicle, getAllVehicles } from '../../services/vehicles';
 import { FloatingButton, Item } from "react-floating-button";
 import AddNew from '../utility/images/AddIcon.jpg';
 import AddNewVehicle from './AddNewVehicle';
+import { Col, Container, Row } from 'react-bootstrap';
 
 export default class ListVehicle extends Component {
     constructor(props) {
@@ -15,7 +16,7 @@ export default class ListVehicle extends Component {
         }
     }
 
-    async componentDidMount(){
+    async componentDidMount() {
         await getAllVehicles().then((responseJson) => {
             this.setState({
                 cars: responseJson
@@ -25,31 +26,35 @@ export default class ListVehicle extends Component {
 
     render() {
         return (
-            <div style={{display: 'flex', flexDirection: 'row'}}>
-                {this.state.cars.map(car => 
-                    <VehicleCard callback={(value) => this.delete(value)} key={car.licensePlate} data = {car} />
-                )}
-                <FloatingButton
-                >
-                <Item
-                    imgSrc={AddNew}
-                    backgroundColor='#3265CE'
-                    onClick={() => this.setAddNewModal(true)}
-                />
-                </FloatingButton>
-                <AddNewVehicle show={this.state.isOpenNewCar} onHide={()=>this.setAddNewModal(false)} />
+            <div class="container-fluid">
+                <div class="row mx-3 my-4">
+                    {this.state.cars.map(car =>
+                        <div class="col-sm-6 col-md-4 col-lg-3 my-1">
+                            <VehicleCard callback={(value) => this.delete(value)} key={car.licensePlate} data={car} />
+                        </div>
+                    )}
+                    <FloatingButton
+                    >
+                        <Item
+                            imgSrc={AddNew}
+                            backgroundColor='#3265CE'
+                            onClick={() => this.setAddNewModal(true)}
+                        />
+                    </FloatingButton>
+                    <AddNewVehicle show={this.state.isOpenNewCar} onHide={() => this.setAddNewModal(false)} />
+                </div>
             </div>
         );
     }
 
-    delete(value){
+    delete(value) {
         deleteVehicle(JSON.stringify(value));
         window.location.reload();
     }
 
-    setAddNewModal(value){
+    setAddNewModal(value) {
         this.setState({
-            isOpenNewCar:value
+            isOpenNewCar: value
         })
     }
 }
