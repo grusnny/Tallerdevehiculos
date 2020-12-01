@@ -30,7 +30,6 @@ export default function RepairModal(props) {
                 {props.data.map((repair, index) =>
                     <div key={index}>
                         <RepairCard callback={(value) => deleteHistory(value)} key={repair.id} data={repair}/>
-                        <AddNewRepair licenseplatevehicle={repair.licensePlateVehicle} show={isOpenEdit} onHide={() => setIsOpenEdit(false)} />
                     </div>
                 )}
             </Modal.Body>
@@ -38,10 +37,10 @@ export default function RepairModal(props) {
                 <Button onClick={()=>setIsOpenEdit(true)} variant='success'>Add</Button>
                 <Button variant='secondary' onClick={props.onHide}>Close</Button>
             </Modal.Footer>
-            
+            <AddNewRepair licenseplatevehicle={props.licenseplatevehicle} show={isOpenEdit} onHide={() => setIsOpenEdit(false)} />
         </Modal>
     );
 
     
     
-  }
+  } 

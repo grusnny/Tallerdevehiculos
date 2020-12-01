@@ -60,6 +60,7 @@ export default function AddNewRepair(props) {
                     otherCosts,
                     inCharge
                 }
+                console.log(createRepair);
                 postRepair(JSON.stringify(createRepair)).then(response => {
                     window.location.reload();
                 })
