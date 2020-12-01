@@ -4,7 +4,6 @@ import { deleteVehicle, getAllVehicles } from '../../services/vehicles';
 import { FloatingButton, Item } from "react-floating-button";
 import AddNew from '../utility/images/AddIcon.jpg';
 import AddNewVehicle from './AddNewVehicle';
-import { Col, Container, Row } from 'react-bootstrap';
 
 export default class ListVehicle extends Component {
     constructor(props) {
@@ -48,8 +47,9 @@ export default class ListVehicle extends Component {
     }
 
     delete(value) {
-        deleteVehicle(JSON.stringify(value));
-        window.location.reload();
+        deleteVehicle(JSON.stringify(value)).then(response => {
+            window.location.reload();
+        });
     }
 
     setAddNewModal(value) {

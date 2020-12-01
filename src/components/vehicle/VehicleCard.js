@@ -4,6 +4,7 @@ import OwnerModal from '../owner/OwnerModal';
 import { getRepairByLicensePlate } from '../../services/repairs';
 import RepairModal from '../repair/RepairModal';
 import DeleteAsk from '../DeleteAsk';
+import AddNewVehicle from './AddNewVehicle';
 
 export default class CardVehicle extends Component {
     constructor(props) {
@@ -12,6 +13,7 @@ export default class CardVehicle extends Component {
             isOpenUser: false,
             isOpenHistory: false,
             isOpenDelete: false,
+            isOpenEdit:false,
             repairs: []
         }
     }
@@ -38,19 +40,24 @@ export default class CardVehicle extends Component {
                         </div>
                     </ListGroup.Item>
                     <Card.Footer>
-                        <Button variant="primary" style={{marginRight: '10px'}} size="sm" >Edit</Button>
+                        <Button onClick={()=>this.setEditModal(true)} variant="primary" style={{marginRight: '10px'}} size="sm" >Edit</Button>
                         <Button onClick={()=>this.setModalDeleteShow(true)} variant="danger" size="sm" >Delete</Button>
                     </Card.Footer>
                 </ListGroup>
                 <DeleteAsk delete={()=>this.deleteVehicle()} show={this.state.isOpenDelete} onHide={()=>this.setModalDeleteShow(false)} />
                 <OwnerModal data={this.props.data.owner} show={this.state.isOpenUser} onHide={()=>this.setModalUserShow(false)}/>
                 <RepairModal data={this.state.repairs} show={this.state.isOpenHistory} onHide={() => this.setModalRepairShow(false)}/>
+                <AddNewVehicle data={this.props.data} show={this.state.isOpenEdit} onHide={()=>this.setEditModal(false)} />
             </Card>
         );
     }
 
     setModalUserShow(value){
         this.setState({isOpenUser:value});
+    }
+
+    setEditModal(value){
+        this.setState({isOpenEdit:value});
     }
 
     setModalRepairShow(value){

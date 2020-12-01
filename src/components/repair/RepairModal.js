@@ -1,8 +1,19 @@
-import React from 'react';
+import React, {useState, useCallback, useEffect } from 'react';
 import {Modal, Button} from 'react-bootstrap'; 
 import RepairCard from './RepairCard';
+import {deleteRepair, getRepairByLicensePlate} from '../../services/repairs';
+import { faWindowRestore } from '@fortawesome/free-solid-svg-icons';
 
 export default function RepairModal(props) {
+
+
+
+    const deleteHistory = async (value) => {
+        deleteRepair(JSON.stringify(value)).then(response => {
+            window.location.reload();
+        })
+    }
+
     return (
         <Modal
             {...props}
@@ -17,13 +28,16 @@ export default function RepairModal(props) {
             </Modal.Header>
             <Modal.Body>
                 {props.data.map(repair =>
-                    <RepairCard key={repair.rId} data={repair}/>
+                    <RepairCard callback={(value) => deleteHistory(value)} key={repair.rId} data={repair}/>
                 )}
             </Modal.Body>
             <Modal.Footer>
-            <Button onClick={props.onHide}>Close</Button>
+            <Button variant='success'>Add</Button>
+            <Button variant='secondary' onClick={props.onHide}>Close</Button>
             </Modal.Footer>
         </Modal>
     );
+
+    
     
   }
