@@ -25,10 +25,10 @@ export default class ListVehicle extends Component {
 
     render() {
         return (
-            <div class="container-fluid">
-                <div class="row mx-3 my-4">
+            <div className="container-fluid">
+                <div className="row mx-3 my-4">
                     {this.state.cars.map(car =>
-                        <div class="col-sm-6 col-md-4 col-lg-3 my-1">
+                        <div key={car.licensePlate} className="col-sm-6 col-md-4 col-lg-3 my-1">
                             <VehicleCard callback={(value) => this.delete(value)} key={car.licensePlate} data={car} />
                         </div>
                     )}

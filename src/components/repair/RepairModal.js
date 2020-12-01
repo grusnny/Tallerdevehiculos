@@ -1,11 +1,11 @@
-import React, {useState, useCallback, useEffect } from 'react';
+import React, { useState } from 'react';
 import {Modal, Button} from 'react-bootstrap'; 
 import RepairCard from './RepairCard';
-import {deleteRepair, getRepairByLicensePlate} from '../../services/repairs';
-import { faWindowRestore } from '@fortawesome/free-solid-svg-icons';
+import {deleteRepair} from '../../services/repairs';
+import AddNewRepair from './AddNewRepair';
 
 export default function RepairModal(props) {
-
+    const [isOpenEdit, setIsOpenEdit] = new useState(false);
 
 
     const deleteHistory = async (value) => {
@@ -27,14 +27,18 @@ export default function RepairModal(props) {
             </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                {props.data.map(repair =>
-                    <RepairCard callback={(value) => deleteHistory(value)} key={repair.rId} data={repair}/>
+                {props.data.map((repair, index) =>
+                    <div key={index}>
+                        <RepairCard callback={(value) => deleteHistory(value)} key={repair.id} data={repair}/>
+                        <AddNewRepair licenseplatevehicle={repair.licensePlateVehicle} show={isOpenEdit} onHide={() => setIsOpenEdit(false)} />
+                    </div>
                 )}
             </Modal.Body>
             <Modal.Footer>
-            <Button variant='success'>Add</Button>
-            <Button variant='secondary' onClick={props.onHide}>Close</Button>
+                <Button onClick={()=>setIsOpenEdit(true)} variant='success'>Add</Button>
+                <Button variant='secondary' onClick={props.onHide}>Close</Button>
             </Modal.Footer>
+            
         </Modal>
     );
 
