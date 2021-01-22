@@ -39,7 +39,7 @@ class Register extends Component {
     }
 
     // Firebase Auth integration here
-    const { username, email, password } = this.state;
+    const { email, password } = this.state;
     await app
             .auth()
             .createUserWithEmailAndPassword(email, password)
