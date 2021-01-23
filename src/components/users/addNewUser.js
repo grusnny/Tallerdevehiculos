@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Modal, Button, Form, Row, Col} from 'react-bootstrap'; 
-import {postVehicle, updateVehicle} from '../../services/vehicles';
 import Select from '@material-ui/core/Select';
+import { postUser, updateUser } from '../../services/users';
 
 
 export default function addNewUser(props) {
@@ -22,28 +22,32 @@ export default function addNewUser(props) {
 
 
     const submit = e => {
-        // e.preventDefault();
-        // if(uId==='' && id ==='' && name ==='' && lastName==='' && telephone==='' && email ===''){
-        //     alert('Missing fields to fill');
-        // }else{
-        //     const createUser = {
-        //             uId,
-        //             id,
-        //             name,
-        //             lastName,
-        //             telephone,
-        //             email,
-        //             role,
-        //             creationDate: '11/12/2020 10:30'
+        e.preventDefault();
+        if(uId==='' && id ==='' && name ==='' && lastName==='' && telephone==='' && email ===''){
+            alert('Missing fields to fill');
+        }else{
+            const createUser = {
+                    uId,
+                    id,
+                    name,
+                    lastName,
+                    telephone,
+                    email,
+                    role,
+                    creationDate: '11/12/2020 10:30'
                 
-        //     }
-        //     if(isEditing){
-               
+            }
+            if(isEditing){
+               updateUser(JSON.stringify(createUser)).then(response => {
+                   window.location.reload();
+               })
         
-        //     }else{
-        //          console.log("create");
-        //     }
-        // }
+            }else{
+                 postUser(JSON.stringify(createUser)).then(response => {
+                     window.location.reload();
+                 })
+            }
+        }
     }
 
     useEffect(() => {
@@ -54,13 +58,13 @@ export default function addNewUser(props) {
     })
 
     const setUser = async () => {
-        setUId(props.data.user.uId);
-        setId(props.data.user.id);
-        setName(props.data.user.name);
-        setLastName(props.data.user.lastName);
-        setTelephone(props.data.user.telephone);
-        setEmail(props.data.user.email);
-        setRole(props.data.user.role)
+        setUId(props.data.uId);
+        setId(props.data.id);
+        setName(props.data.name);
+        setLastName(props.data.lastName);
+        setTelephone(props.data.telephone);
+        setEmail(props.data.email);
+        setRole(props.data.role)
         setIsEditing(true);
     };
 
@@ -87,20 +91,17 @@ export default function addNewUser(props) {
                     <br/>
                     <Row>
                         <Col>
-                            <Form.Control id="uId" placeholder="Username" value={uId} onChange={e => setUId(e.target.value)}/>
-                        </Col>
-                        <Col>
                             <Form.Control id="id" placeholder="ID"  value={id} onChange={e => setId(e.target.value)}/>
                         </Col>
                         <Col>
-                            <Form.Control id="email" placeholder="Email"  value={email} onChange={e => setEmail(e.target.setEmail)}/>
+                            <Form.Control id="email" placeholder="Email"  value={email} onChange={e => setEmail(e.target.value)}/>
+                        </Col>
+                        <Col>
+                            <Form.Control id="name" placeholder="Name"  value={name} onChange={e => setName(e.target.value)}/>
                         </Col>
                     </Row>
                     <br/>
                     <Row>
-                        <Col>
-                            <Form.Control id="name" placeholder="Name"  value={name} onChange={e => setName(e.target.value)}/>
-                        </Col>
                         <Col>
                             <Form.Control id="lastname" placeholder="Lastname"  value={lastName} onChange={e => setLastName(e.target.value)}/>
                         </Col>

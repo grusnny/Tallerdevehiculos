@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import userForm from './userForm';
+import UserForm from './userForm';
 import { FloatingButton, Item } from "react-floating-button";
 import AddNew from '../utility/images/AddIcon.jpg';
 import AddNewUser from './addNewUser';
+import { getUserByRole } from '../../services/users';
 
 
 
@@ -11,17 +12,35 @@ export default class userList extends Component {
         super(props)
         this.state = {
             isOpenNewUser: false,
+            mechanicUsers: [],
+            ownerUsers: [],
         }
+    }
+
+    async componentDidMount(){
+        await getUserByRole("Owner").then((ResponseJson) => {
+            console.log(ResponseJson);
+            this.setState({
+                ownerUsers: ResponseJson
+            })
+        });
+        await getUserByRole("Mechanic").then((ResponseJson) => {
+            this.setState({
+                mechanicUsers: ResponseJson
+            })
+        })
     }
 
     render() {
         return (
             <div className="container-fluid">
                 <div styles={{ height: '500px', overflowY: 'scroll' }}>
-                    ...
+                    <UserForm data={this.state.ownerUsers} user={"Owners"} />
                 </div>
+                <br/>
+                <br/>
                 <div styles={{ height: '500px', overflowY: 'scroll' }}>
-                    ...
+                    <UserForm data={this.state.mechanicUsers} user={"Mechanics"} />
                 </div>
                 <FloatingButton
                     >
@@ -32,6 +51,8 @@ export default class userList extends Component {
                         />
                 </FloatingButton>
                 <AddNewUser show={this.state.isOpenNewUser} onHide={() => this.setAddNewUser(false)} />
+                <br/>
+                <br/>
             </div>
         );
     }
