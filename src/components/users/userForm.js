@@ -29,12 +29,12 @@ export default function userForm(props) {
         <Table className={classes.table} size="small" aria-label="a dense table">
             <TableHead>
             <TableRow>
-                <TableCell>Full name</TableCell>
-                <TableCell align="right">ID</TableCell>
-                <TableCell align="right">Email</TableCell>
-                <TableCell align="right">Telephone</TableCell>
-                <TableCell align="right">Creation Date</TableCell>
-                <TableCell align="right"></TableCell>
+                <TableCell width="20%" >Full name</TableCell>
+                <TableCell width="17%" align="right">ID</TableCell>
+                <TableCell width="17%" align="right">Email</TableCell>
+                <TableCell width="15%" align="right">Telephone</TableCell>
+                <TableCell width="15%" align="right">Creation Date</TableCell>
+                <TableCell width="15%" align="right"></TableCell>
             </TableRow>
             </TableHead>
             <TableBody>
