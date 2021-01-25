@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {Modal, Button, Form, Row, Col} from 'react-bootstrap'; 
+import { getUserByRole } from '../../services/users';
 import {postVehicle, updateVehicle} from '../../services/vehicles';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import TextField from '@material-ui/core/TextField';
 
 
 export default function AddNewVehicle(props) {
-
     const [licensePlate, setLicensePlate] = new useState('');
     const [type, setType] = new useState('');
     const [mark, setMark] = new useState('');
@@ -18,13 +20,14 @@ export default function AddNewVehicle(props) {
     const [email, setEmail] = new useState('');
     const [isEditing , setIsEditing] = new useState(false);
     const [isBuilding , setIsBuilding] = new useState(true);
-    //const [creationDate, setCreationDate] = new useState('');
+    const [creationDate, setCreationDate] = new useState('');
+    
 
 
 
     const submit = e => {
         e.preventDefault();
-        if(licensePlate === '' && type ==='' && mark ==='' && color ==='' && modelNumber==='' && uId==='' &&
+        if(licensePlate === '' && type ==='' && mark ==='' && color ==='' && modelNumber==='' &&
             id ==='' && name ==='' && lastName==='' && telephone==='' && email ==='' ){
 
             alert('Missing fields to fill');
@@ -48,11 +51,11 @@ export default function AddNewVehicle(props) {
             }
             if(isEditing){
                 updateVehicle(JSON.stringify(createVehicle)).then(response => {
-                    window.location.reload();
+                    console.log(response);
                 })
             }else{
                 postVehicle(JSON.stringify(createVehicle)).then(response => {
-                    window.location.reload();
+                    console.log(response);
                     
                 })
             }
@@ -82,6 +85,18 @@ export default function AddNewVehicle(props) {
         setIsEditing(true);
     };
 
+    const setOwner = (value) => {
+        if(value != null){
+            setUId(value.uId);
+            setId(value.id);
+            setName(value.name);
+            setLastName(value.lastName);
+            setTelephone(value.telephone);
+            setEmail(value.email);
+        }
+        
+    }
+
     return (
         
         <Modal
@@ -103,7 +118,10 @@ export default function AddNewVehicle(props) {
                     <br/>
                     <Row>
                         <Col>
-                            <Form.Control id="licensePlate" placeholder="License plate" value={licensePlate} onChange={e => setLicensePlate(e.target.value)}/>
+                            {isEditing
+                                ? <Form.Control disabled={true} id="licensePlate" placeholder="License plate" value={licensePlate} onChange={e => setLicensePlate(e.target.value)}/>
+                                : <Form.Control id="licensePlate" placeholder="License plate" value={licensePlate} onChange={e => setLicensePlate(e.target.value)}/>
+                            }
                         </Col>
                         <Col>
                             <Form.Control id="type" placeholder="Type of vehicle" value={type} onChange={e => setType(e.target.value)} />
@@ -130,25 +148,33 @@ export default function AddNewVehicle(props) {
                     <br/>
                     <Row>
                         <Col>
-                            <Form.Control id="uId" placeholder="Username" value={uId} onChange={e => setUId(e.target.value)}/>
+                        {!isEditing && 
+                            <Autocomplete
+                                id="combo-box-owners"
+                                onChange={(event, value) => setOwner(value)}
+                                options={props.owners}
+                                getOptionLabel={(option) => option.email}
+                                renderInput={(params) => <TextField {...params} label="Select an owner" variant="outlined" />}
+                            />
+                        }
                         </Col>
                         <Col>
-                            <Form.Control id="id" placeholder="ID"  value={id} onChange={e => setId(e.target.value)}/>
+                            <Form.Control disabled={true} id="id" placeholder="ID"  value={id} onChange={e => setId(e.target.value)}/>
                         </Col>
                         <Col>
-                            <Form.Control id="email" placeholder="Email"  value={email} onChange={e => setEmail(e.target.setEmail)}/>
+                            <Form.Control disabled={true} id="email" placeholder="Email"  value={email} onChange={e => setEmail(e.target.setEmail)}/>
                         </Col>
                     </Row>
                     <br/>
                     <Row>
                         <Col>
-                            <Form.Control id="name" placeholder="Name"  value={name} onChange={e => setName(e.target.value)}/>
+                            <Form.Control disabled={true} id="name" placeholder="Name"  value={name} onChange={e => setName(e.target.value)}/>
                         </Col>
                         <Col>
-                            <Form.Control id="lastname" placeholder="Lastname"  value={lastName} onChange={e => setLastName(e.target.value)}/>
+                            <Form.Control disabled={true} id="lastname" placeholder="Lastname"  value={lastName} onChange={e => setLastName(e.target.value)}/>
                         </Col>
                         <Col>
-                            <Form.Control id="telephone" placeholder="Telephone"  value={telephone} onChange={e => setTelephone(e.target.value)}/>
+                            <Form.Control disabled={true} id="telephone" placeholder="Telephone"  value={telephone} onChange={e => setTelephone(e.target.value)}/>
                         </Col>
                     </Row>
                 </Form>

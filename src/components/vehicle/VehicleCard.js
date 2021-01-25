@@ -47,7 +47,7 @@ export default class CardVehicle extends Component {
                 <DeleteAsk delete={()=>this.deleteVehicle()} show={this.state.isOpenDelete} onHide={()=>this.setModalDeleteShow(false)} />
                 <OwnerModal data={this.props.data.owner} show={this.state.isOpenUser} onHide={()=>this.setModalUserShow(false)}/>
                 <RepairModal licenseplatevehicle={this.props.data.licensePlate} data={this.state.repairs} show={this.state.isOpenHistory} onHide={() => this.setModalRepairShow(false)}/>
-                <AddNewVehicle data={this.props.data} show={this.state.isOpenEdit} onHide={()=>this.setEditModal(false)} />
+                <AddNewVehicle owners={[]} data={this.props.data} show={this.state.isOpenEdit} onHide={()=>this.setEditModal(false)} />
             </Card>
         );
     }

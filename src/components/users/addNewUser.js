@@ -44,7 +44,7 @@ export default function addNewUser(props) {
         
             }else{
                  postUser(JSON.stringify(createUser)).then(response => {
-                     window.location.reload();
+                     console.log(response);
                  })
             }
         }

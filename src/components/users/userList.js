@@ -19,7 +19,6 @@ export default class userList extends Component {
 
     async componentDidMount(){
         await getUserByRole("Owner").then((ResponseJson) => {
-            console.log(ResponseJson);
             this.setState({
                 ownerUsers: ResponseJson
             })

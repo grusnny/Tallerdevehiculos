@@ -4,6 +4,7 @@ import { deleteVehicle, getAllVehicles } from '../../services/vehicles';
 import { FloatingButton, Item } from "react-floating-button";
 import AddNew from '../utility/images/AddIcon.jpg';
 import AddNewVehicle from './AddNewVehicle';
+import { getUserByRole } from '../../services/users';
 
 export default class ListVehicle extends Component {
     constructor(props) {
@@ -11,11 +12,17 @@ export default class ListVehicle extends Component {
         this.state = {
             cars: [],
             isOpenNewCar: false,
-            cars2: []
+            cars2: [],
+            owners:[]
         }
     }
 
     async componentDidMount() {
+        await getUserByRole("Owner").then((ResponseJson) => {
+            this.setState({
+                owners: ResponseJson
+            });
+        });
         await getAllVehicles().then((responseJson) => {
             this.setState({
                 cars: responseJson
@@ -40,7 +47,7 @@ export default class ListVehicle extends Component {
                             onClick={() => this.setAddNewModal(true)}
                         />
                     </FloatingButton>
-                    <AddNewVehicle show={this.state.isOpenNewCar} onHide={() => this.setAddNewModal(false)} />
+                    <AddNewVehicle owners={this.state.owners} show={this.state.isOpenNewCar} onHide={() => this.setAddNewModal(false)} />
                 </div>
             </div>
         );
