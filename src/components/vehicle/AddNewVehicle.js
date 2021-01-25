@@ -51,11 +51,11 @@ export default function AddNewVehicle(props) {
             }
             if(isEditing){
                 updateVehicle(JSON.stringify(createVehicle)).then(response => {
-                    console.log(response);
+                    window.location.reload();
                 })
             }else{
                 postVehicle(JSON.stringify(createVehicle)).then(response => {
-                    console.log(response);
+                    window.location.reload();
                     
                 })
             }
