@@ -47,6 +47,12 @@ export default class Navbar extends Component {
                 Car List
               </a>
             )}
+
+            {this.props.auth.isAuthenticated && (
+              <a href="/loginmail" className="navbar-item">
+                Send Auth Link
+              </a>
+            )}
             
             
           </div>

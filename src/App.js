@@ -17,6 +17,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEdit} from '@fortawesome/free-solid-svg-icons';
 import app from "./components/firebaseConfig";
 import VehicleList from './components/vehicle/VehicleList';
+import VehicleListUser from './components/vehicle/VehicleListUser';
 
 
 library.add(faEdit);
@@ -67,9 +68,8 @@ class App extends Component {
       setAuthStatus: this.setAuthStatus,
       setUser: this.setUser
     }
-    return (
-      !this.state.isAuthenticating &&
-      <div className="App">
+    if(this.state.isAuthenticated){
+      return(<div className="App">
         <Router>
           <div>
             <Navbar auth={authProps} />
@@ -85,12 +85,32 @@ class App extends Component {
               <Route exact path="/changepasswordconfirmation" render={(props) => <ChangePasswordConfirm {...props} auth={authProps} />} />
               <Route exact path="/welcome" render={(props) => <Welcome {...props} auth={authProps} />} />
               <Route exact path="/carlist" render={(props) => <VehicleList {...props} auth ={authProps} />} />
+              <Route exact path="/carlistuser" render={(props) => <VehicleListUser {...props} auth ={authProps} />} />
             </Switch>
             <Footer />
           </div>
         </Router>
-      </div>
-    );
+      </div>);
+    }else{
+      return (
+        <Router>
+          <div>
+            <Navbar auth={authProps} />
+            <Switch>
+              <Route exact path="/" render={(props) => <Home {...props} auth={authProps} />} />
+              <Route exact path="/login" render={(props) => <LogIn {...props} auth={authProps} />} />
+              <Route exact path="/register" render={(props) => <Register {...props} auth={authProps} />} />
+              <Route exact path="/forgotpassword" render={(props) => <ForgotPassword {...props} auth={authProps} />} />
+              <Route exact path="/forgotpasswordverification" render={(props) => <ForgotPasswordVerification {...props} auth={authProps} />} />
+              <Route exact path="/changepassword" render={(props) => <ChangePassword {...props} auth={authProps} />} />
+              <Route exact path="/changepasswordconfirmation" render={(props) => <ChangePasswordConfirm {...props} auth={authProps} />} />
+            </Switch>
+            <Footer />
+          </div>
+        </Router>
+      );
+    }
+    
   }
 }
 

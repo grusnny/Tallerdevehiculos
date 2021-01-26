@@ -66,7 +66,7 @@ class LogInLinkMail extends Component {
     var actionCodeSettings = {
         // URL you want to redirect back to. The domain (www.example.com) for this
         // URL must be in the authorized domains list in the Firebase Console.
-        url: 'http://localhost:3000/carlist',
+        url: 'https://taller-de-vehiculos-968be.web.app/carlistuser',
         // This must be true.
         handleCodeInApp: true,
       };
@@ -90,11 +90,7 @@ class LogInLinkMail extends Component {
             .sendSignInLinkToEmail(this.state.email, actionCodeSettings)
             .then(result => {
                 window.localStorage.setItem('emailForSignIn', this.state.password);
-                window.localStorage.setItem('user', this.state.username);
-                //window.localStorage.setItem('userID', result.user);
-                //this.props.auth.setAuthStatus(true);
-                //this.props.auth.setUser(result.user);
-                //this.props.history.push("/");
+                window.alert("We sent you a mail with the link for auth");
             })
             .catch(error => {
               let err = null;
