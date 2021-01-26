@@ -57,6 +57,7 @@ class LogIn extends Component {
                 this.props.auth.setAuthStatus(true);
                 this.props.auth.setUser(result.user);
                 this.props.history.push("/");
+                window.location.reload();
             })
             .catch(error => {
               let err = null;

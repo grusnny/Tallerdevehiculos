@@ -114,7 +114,6 @@ class LogInLinkMail extends Component {
         >
             <Card.Header>
                 <Card.Title>
-                    Add new car
                 </Card.Title>
             </Card.Header>
             <Card.Body>

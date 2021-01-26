@@ -11,6 +11,7 @@ export default class userList extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            isLoading: false,
             isOpenNewUser: false,
             mechanicUsers: [],
             ownerUsers: [],
@@ -28,32 +29,38 @@ export default class userList extends Component {
                 mechanicUsers: ResponseJson
             })
         })
+        this.setState({isLoading:true});
     }
 
     render() {
-        return (
-            <div className="container-fluid">
-                <div styles={{ height: '500px', overflowY: 'scroll' }}>
-                    <UserForm data={this.state.ownerUsers} user={"Owners"} />
+        if(this.state.isLoading){
+            return (
+                <div className="container-fluid">
+                    <div styles={{ height: '500px', overflowY: 'scroll' }}>
+                        <UserForm data={this.state.ownerUsers} user={"Owners"} />
+                    </div>
+                    <br/>
+                    <br/>
+                    <div styles={{ height: '500px', overflowY: 'scroll' }}>
+                        <UserForm data={this.state.mechanicUsers} user={"Mechanics"} />
+                    </div>
+                    <FloatingButton
+                        >
+                            <Item
+                                imgSrc={AddNew}
+                                backgroundColor='#3265CE'
+                                onClick={() => this.setAddNewUser(true)}
+                            />
+                    </FloatingButton>
+                    <AddNewUser show={this.state.isOpenNewUser} onHide={() => this.setAddNewUser(false)} />
+                    <br/>
+                    <br/>
                 </div>
-                <br/>
-                <br/>
-                <div styles={{ height: '500px', overflowY: 'scroll' }}>
-                    <UserForm data={this.state.mechanicUsers} user={"Mechanics"} />
-                </div>
-                <FloatingButton
-                    >
-                        <Item
-                            imgSrc={AddNew}
-                            backgroundColor='#3265CE'
-                            onClick={() => this.setAddNewUser(true)}
-                        />
-                </FloatingButton>
-                <AddNewUser show={this.state.isOpenNewUser} onHide={() => this.setAddNewUser(false)} />
-                <br/>
-                <br/>
-            </div>
-        );
+            );
+        }else{
+            return(<progress class="progress is-large is-link" max="100">15%</progress>);
+        }
+        
     }
 
     setAddNewUser(value) {

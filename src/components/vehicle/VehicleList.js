@@ -10,6 +10,7 @@ export default class ListVehicle extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            isLoading: false,
             cars: [],
             isOpenNewCar: false,
             cars2: [],
@@ -28,29 +29,35 @@ export default class ListVehicle extends Component {
                 cars: responseJson
             })
         });
+        this.setState({isLoading:true});
     }
 
     render() {
-        return (
-            <div className="container-fluid">
-                <div className="row mx-3 my-4">
-                    {this.state.cars.map(car =>
-                        <div key={car.licensePlate} className="col-sm-6 col-md-4 col-lg-3 my-1">
-                            <VehicleCard callback={(value) => this.delete(value)} key={car.licensePlate} data={car} />
-                        </div>
-                    )}
-                    <FloatingButton
-                    >
-                        <Item
-                            imgSrc={AddNew}
-                            backgroundColor='#3265CE'
-                            onClick={() => this.setAddNewModal(true)}
-                        />
-                    </FloatingButton>
-                    <AddNewVehicle owners={this.state.owners} show={this.state.isOpenNewCar} onHide={() => this.setAddNewModal(false)} />
+        if(this.state.isLoading){
+            return (
+                <div className="container-fluid">
+                    <div className="row mx-3 my-4">
+                        {this.state.cars.map(car =>
+                            <div key={car.licensePlate} className="col-sm-6 col-md-4 col-lg-3 my-1">
+                                <VehicleCard callback={(value) => this.delete(value)} key={car.licensePlate} data={car} />
+                            </div>
+                        )}
+                        <FloatingButton
+                        >
+                            <Item
+                                imgSrc={AddNew}
+                                backgroundColor='#3265CE'
+                                onClick={() => this.setAddNewModal(true)}
+                            />
+                        </FloatingButton>
+                        <AddNewVehicle owners={this.state.owners} show={this.state.isOpenNewCar} onHide={() => this.setAddNewModal(false)} />
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        }else{
+            return(<progress class="progress is-large is-link" max="100">15%</progress>);
+        }
+        
     }
 
     delete(value) {
