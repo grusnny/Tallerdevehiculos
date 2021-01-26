@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Users from './components/users/userList';
 import LogIn from './components/auth/LogIn';
+import LogInLinkMail from './components/auth/LogInMail';
 import Register from './components/auth/Register';
 import ForgotPassword from './components/auth/ForgotPassword';
 import ForgotPasswordVerification from './components/auth/ForgotPasswordVerification';
@@ -76,6 +77,7 @@ class App extends Component {
               <Route exact path="/" render={(props) => <Home {...props} auth={authProps} />} />
               <Route exact path="/users" render={(props) => <Users {...props} auth={authProps} />} />
               <Route exact path="/login" render={(props) => <LogIn {...props} auth={authProps} />} />
+              <Route exact path="/loginmail" render={(props) => <LogInLinkMail {...props} auth={authProps} />} />
               <Route exact path="/register" render={(props) => <Register {...props} auth={authProps} />} />
               <Route exact path="/forgotpassword" render={(props) => <ForgotPassword {...props} auth={authProps} />} />
               <Route exact path="/forgotpasswordverification" render={(props) => <ForgotPasswordVerification {...props} auth={authProps} />} />
