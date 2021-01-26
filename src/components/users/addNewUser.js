@@ -17,7 +17,6 @@ export default function addNewUser(props) {
     const [role, setRole] = new useState('Owner');
     const [isEditing , setIsEditing] = new useState(false);
     const [isBuilding , setIsBuilding] = new useState(true);
-    //const [creationDate, setCreationDate] = new useState('');
 
 
 
@@ -26,6 +25,7 @@ export default function addNewUser(props) {
         if(uId==='' && id ==='' && name ==='' && lastName==='' && telephone==='' && email ===''){
             alert('Missing fields to fill');
         }else{
+            var date = (new Date()).toLocaleString();
             const createUser = {
                     uId,
                     id,
@@ -34,7 +34,7 @@ export default function addNewUser(props) {
                     telephone,
                     email,
                     role,
-                    creationDate: '11/12/2020 10:30'
+                    creationDate: date,
                 
             }
             if(isEditing){
@@ -44,7 +44,7 @@ export default function addNewUser(props) {
         
             }else{
                  postUser(JSON.stringify(createUser)).then(response => {
-                     window.location.reload();
+                    window.location.reload();
                  })
             }
         }

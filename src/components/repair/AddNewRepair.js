@@ -7,7 +7,7 @@ export default function AddNewRepair(props) {
 
     
     const [repairBy, setRepairBy] = new useState('');
-    const [repairDate, setRepairDate] = new useState('');
+    const [repairDate, setRepairDate] = new useState((new Date()).toLocaleString());
     const [state, setState] = new useState('');
     //const [listStates, setListStates] = new useState([]);
     //const [spareParts, setSpareParts] = new useState([]);
@@ -45,7 +45,7 @@ export default function AddNewRepair(props) {
                 }
                 console.log(createRepair);
                 updateRepair(JSON.stringify(createRepair)).then(response => {
-                    window.location.reload();
+                    props.onHide();
                 })
             }else{
                 const createRepair = {
@@ -62,7 +62,7 @@ export default function AddNewRepair(props) {
                 }
                 console.log(createRepair);
                 postRepair(JSON.stringify(createRepair)).then(response => {
-                    window.location.reload();
+                    props.onHide();
                 })
             }
             
@@ -105,7 +105,7 @@ export default function AddNewRepair(props) {
                     <br/>
                     <Row>
                         <Col>
-                            <Form.Control id="repairDate" placeholder="Repair Date" value={repairDate} onChange={e => setRepairDate(e.target.value)}/>
+                            <Form.Control disabled={true} id="repairDate" placeholder="Repair Date" value={repairDate} onChange={e => setRepairDate(e.target.value)}/>
                         </Col>
                         <Col>
                             <Form.Control id="repairBy" placeholder="Repair By" value={repairBy} onChange={e => setRepairBy(e.target.value)}/>

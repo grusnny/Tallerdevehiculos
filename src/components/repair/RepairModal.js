@@ -10,10 +10,9 @@ export default function RepairModal(props) {
 
     const deleteHistory = async (value) => {
         deleteRepair(JSON.stringify(value)).then(response => {
-            window.location.reload();
+            props.onHide();
         })
     }
-
     return (
         <Modal
             {...props}
@@ -29,7 +28,7 @@ export default function RepairModal(props) {
             <Modal.Body>
                 {props.data.map((repair, index) =>
                     <div key={index}>
-                        <RepairCard callback={(value) => deleteHistory(value)} key={repair.id} data={repair}/>
+                        <RepairCard onupdate={props.onupdate} callback={(value) => deleteHistory(value)} key={repair.id} data={repair}/>
                     </div>
                 )}
             </Modal.Body>
@@ -40,7 +39,4 @@ export default function RepairModal(props) {
             <AddNewRepair licenseplatevehicle={props.licenseplatevehicle} show={isOpenEdit} onHide={() => setIsOpenEdit(false)} />
         </Modal>
     );
-
-    
-    
-  } 
+  }

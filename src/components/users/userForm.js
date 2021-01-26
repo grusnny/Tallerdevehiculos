@@ -20,8 +20,6 @@ export default function userForm(props) {
   const classes = useStyles();
 
   const deleteUSer = (value) => {
-    console.log("Valor a borrar");
-    console.log(value);
     deleteUser(JSON.stringify(value)).then(response => {
        window.location.reload();
     });
@@ -37,8 +35,8 @@ export default function userForm(props) {
                 <TableCell width="20%" >Full name</TableCell>
                 <TableCell width="17%" align="right">ID</TableCell>
                 <TableCell width="17%" align="right">Email</TableCell>
-                <TableCell width="15%" align="right">Telephone</TableCell>
-                <TableCell width="15%" align="right">Creation Date</TableCell>
+                <TableCell width="12%" align="right">Telephone</TableCell>
+                <TableCell width="18%" align="right">Creation Date</TableCell>
                 <TableCell width="15%" align="right"></TableCell>
             </TableRow>
             </TableHead>

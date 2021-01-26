@@ -80,7 +80,7 @@ export default class CardVehicle extends Component {
         this.props.callback(this.props.data);
     }
 
-    getRepairHistory(id=""){
+    getRepairHistory = id => {
         getRepairByLicensePlate(id).then((responseJson)=> {
             this.setState({
                 repairs: responseJson

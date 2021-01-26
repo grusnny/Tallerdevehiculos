@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {Modal, Button, Form, Row, Col} from 'react-bootstrap'; 
-import { getUserByRole } from '../../services/users';
 import {postVehicle, updateVehicle} from '../../services/vehicles';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
@@ -27,6 +26,8 @@ export default function AddNewVehicle(props) {
 
     const submit = e => {
         e.preventDefault();
+        var date = (new Date()).toLocaleString();
+
         if(licensePlate === '' && type ==='' && mark ==='' && color ==='' && modelNumber==='' &&
             id ==='' && name ==='' && lastName==='' && telephone==='' && email ==='' ){
 
@@ -41,13 +42,13 @@ export default function AddNewVehicle(props) {
                     lastName,
                     telephone,
                     email,
-                    creationDate: '11/12/2020 10:30'
+                    creationDate
                 },
                 type,
                 mark,
                 modelNumber,
                 color,
-                admissionDate: '11/12/2020 10:30'
+                admissionDate: date
             }
             if(isEditing){
                 updateVehicle(JSON.stringify(createVehicle)).then(response => {
@@ -93,6 +94,7 @@ export default function AddNewVehicle(props) {
             setLastName(value.lastName);
             setTelephone(value.telephone);
             setEmail(value.email);
+            setCreationDate(value.creationDate);
         }
         
     }

@@ -13,10 +13,12 @@
     "bootstrap": "^4.5.3",
     "bulma": "^0.9.1",
     "firebase": "^7.24.0",
+    "moment": "^2.29.1",
     "react": "^16.7.0",
     "react-bootstrap": "^1.4.0",
     "react-dom": "^16.7.0",
     "react-floating-button": "^1.1.1",
+    "react-moment": "^1.1.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^2.1.3"
   },
