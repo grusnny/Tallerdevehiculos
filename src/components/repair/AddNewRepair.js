@@ -43,7 +43,6 @@ export default function AddNewRepair(props) {
                     otherCosts,
                     inCharge
                 }
-                console.log(createRepair);
                 updateRepair(JSON.stringify(createRepair)).then(response => {
                     props.onHide();
                 })
@@ -60,7 +59,6 @@ export default function AddNewRepair(props) {
                     otherCosts,
                     inCharge
                 }
-                console.log(createRepair);
                 postRepair(JSON.stringify(createRepair)).then(response => {
                     props.onHide();
                 })

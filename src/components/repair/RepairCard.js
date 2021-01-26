@@ -38,6 +38,12 @@ export default class RepairCard extends Component {
     }
 
     setEditModal(value){
-        this.setState({isOpenEdit:value});
+        if(!value){
+            this.setState({isOpenEdit:value});
+            this.props.callback(this.state.isOpenEdit);
+        }else{
+            this.setState({isOpenEdit:value});
+        }
+        
     }
 }

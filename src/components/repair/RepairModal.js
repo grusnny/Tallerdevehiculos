@@ -8,10 +8,19 @@ export default function RepairModal(props) {
     const [isOpenEdit, setIsOpenEdit] = new useState(false);
 
 
-    const deleteHistory = async (value) => {
-        deleteRepair(JSON.stringify(value)).then(response => {
+    const callback = async (value) => {
+        if(value === false){
             props.onHide();
-        })
+        }else{
+            deleteRepair(JSON.stringify(value)).then(response => {
+                props.onHide();
+            })
+        }
+    }
+
+    const closeModals = (value) => {
+        setIsOpenEdit(value);
+        props.onHide();
     }
     return (
         <Modal
@@ -28,7 +37,7 @@ export default function RepairModal(props) {
             <Modal.Body>
                 {props.data.map((repair, index) =>
                     <div key={index}>
-                        <RepairCard onupdate={props.onupdate} callback={(value) => deleteHistory(value)} key={repair.id} data={repair}/>
+                        <RepairCard callback={(value) => callback(value)} key={repair.id} data={repair}/>
                     </div>
                 )}
             </Modal.Body>
@@ -36,7 +45,9 @@ export default function RepairModal(props) {
                 <Button onClick={()=>setIsOpenEdit(true)} variant='success'>Add</Button>
                 <Button variant='secondary' onClick={props.onHide}>Close</Button>
             </Modal.Footer>
-            <AddNewRepair licenseplatevehicle={props.licenseplatevehicle} show={isOpenEdit} onHide={() => setIsOpenEdit(false)} />
+            <AddNewRepair licenseplatevehicle={props.licenseplatevehicle} show={isOpenEdit} onHide={() => closeModals(false)} />
         </Modal>
     );
+
+    
   }
