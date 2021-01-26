@@ -89,7 +89,7 @@ class LogInLinkMail extends Component {
             .auth()
             .sendSignInLinkToEmail(this.state.email, actionCodeSettings)
             .then(result => {
-                window.localStorage.setItem('emailForSignIn', this.state.password);
+                window.localStorage.setItem('emailForSignIn', this.state.email);
                 window.alert("We sent you a mail with the link for auth");
             })
             .catch(error => {

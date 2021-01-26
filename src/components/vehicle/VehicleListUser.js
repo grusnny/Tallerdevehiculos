@@ -3,7 +3,9 @@ import VehicleCard from "./VehicleCardUser";
 import { deleteVehicle, getAllVehicles } from "../../services/vehicles";
 import { FloatingButton, Item } from "react-floating-button";
 import { getUserByRole } from "../../services/users";
-
+import app from "../firebaseConfig";
+import * as firebase from "firebase";
+import "firebase/auth";
 export default class ListVehicle extends Component {
   constructor(props) {
     super(props);
@@ -28,7 +30,7 @@ export default class ListVehicle extends Component {
       });
     });
     this.state.cars.map((element) => {
-      if (element.owner.id==123456) {
+      if (element.owner.email==this.props.auth.user.email) {
         this.state.cars2.push(element);
       }
     });
@@ -56,7 +58,7 @@ export default class ListVehicle extends Component {
             </div>
           );
       }else{
-          return(<progress class="progress is-large is-info" max="100">60%</progress>)
+          return(<progress class="progress is-large is-link" max="100">15%</progress>)
       }
     
   }
