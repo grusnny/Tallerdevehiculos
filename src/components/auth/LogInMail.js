@@ -22,7 +22,7 @@ class LogInLinkMail extends Component {
     name:"",
     lastName:"",
     telephone:"",
-    owner:[],
+    owners:[],
     errors: {
       auth: null,
       blankfield: false
@@ -34,14 +34,14 @@ class LogInLinkMail extends Component {
         this.setState({uId:value.uId});
         this.setState({id:value.id});
         this.setState({name:value.name});
-        this.setState({lasName:value.lastName});
+        this.setState({lastName:value.lastName});
         this.setState({telephone:value.telephone});
         this.setState({email:value.email});
     }
   }
     
-  async componentDidMount() {
-    await getUserByRole("Owner").then((ResponseJson) => {
+  componentDidMount() {
+    getUserByRole("Owner").then((ResponseJson) => {
         this.setState({
             owners: ResponseJson,
             isLoad: false
@@ -70,15 +70,6 @@ class LogInLinkMail extends Component {
         // This must be true.
         handleCodeInApp: true,
       };
-
-    // Form validation
-    this.clearErrorState();
-    const error = Validate(event, this.state);
-    if (error) {
-      this.setState({
-        errors: { ...this.state.errors, ...error }
-      });
-    }
 
     // Firebase Auth integration here
 
@@ -118,23 +109,14 @@ class LogInLinkMail extends Component {
             });
   };
 
-  onInputChange = event => {
-    this.setState({
-      [event.target.id]: event.target.value
-    });
-    document.getElementById(event.target.id).classList.remove("is-danger");
-  };
-
   render() {
-
-    if(this.isLoad){
       return (
         <Card
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
-            centered
+            
         >
-            <Card.Header closeButton>
+            <Card.Header>
                 <Card.Title>
                     Add new car
                 </Card.Title>
@@ -150,42 +132,37 @@ class LogInLinkMail extends Component {
                             <Autocomplete
                                 id="combo-box-owners"
                                 onChange={(event, value) => this.setOwner(value)}
-                                options={this.owners}
+                                options={this.state.owners}
                                 getOptionLabel={(option) => option.email}                            
                                 renderInput={(params) => <TextField {...params} label="Select an owner" variant="outlined" />}
                             />
                         </Col>
                         <Col>
-                            <Form.Control disabled={true} id="id" placeholder="ID"  value={this.id} />
+                            <Form.Control disabled={true} id="id" placeholder="ID"  value={this.state.id} />
                         </Col>
                         <Col>
-                            <Form.Control disabled={true} id="email" placeholder="Email"  value={this.email} />
+                            <Form.Control disabled={true} id="email" placeholder="Email"  value={this.state.email} />
                         </Col>
                     </Row>
                     <br/>
                     <Row>
                         <Col>
-                            <Form.Control disabled={true} id="name" placeholder="Name"  value={this.name} />
+                            <Form.Control disabled={true} id="name" placeholder="Name"  value={this.state.name} />
                         </Col>
                         <Col>
-                            <Form.Control disabled={true} id="lastname" placeholder="Lastname"  value={this.lastName} />
+                            <Form.Control disabled={true} id="lastname" placeholder="Lastname"  value={this.state.lastName} />
                         </Col>
                         <Col>
-                            <Form.Control disabled={true} id="telephone" placeholder="Telephone"  value={this.telephone} />
+                            <Form.Control disabled={true} id="telephone" placeholder="Telephone"  value={this.state.telephone} />
                         </Col>
                     </Row>
                 </Form>
             </Card.Body>
             <Card.Footer>
-            <Button type='submit' variant='success' onClick={this.handleSubmit}>Send link</Button>
+            <Button variant='success' onClick={this.handleSubmit}>Send link</Button>
             </Card.Footer>
         </Card>
     );
-    }else{
-      return(<div>Loading...</div>);
-      
-    }
-    
   }
 }
 
