@@ -37,7 +37,7 @@ class LogInLinkMail extends Component {
         this.setState({lastName:value.lastName});
         this.setState({telephone:value.telephone});
         this.setState({email:value.email});
-    }
+     }
   }
     
   componentDidMount() {
