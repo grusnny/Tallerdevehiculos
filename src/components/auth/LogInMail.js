@@ -13,6 +13,7 @@ class LogInLinkMail extends Component {
     
 
   state = {
+    isLoad: true,
     username: "",
     password: "",
     uId:"",
@@ -21,7 +22,7 @@ class LogInLinkMail extends Component {
     name:"",
     lastName:"",
     telephone:"",
-    owner:["casa"],
+    owner:[],
     errors: {
       auth: null,
       blankfield: false
@@ -39,13 +40,16 @@ class LogInLinkMail extends Component {
     }
   }
     
-  async getOwners (){
+  async componentDidMount() {
     await getUserByRole("Owner").then((ResponseJson) => {
         this.setState({
-            owners: ResponseJson
+            owners: ResponseJson,
+            isLoad: false
         });
     });
   }
+
+
   clearErrorState = () => {
     this.setState({
       errors: {
@@ -121,10 +125,10 @@ class LogInLinkMail extends Component {
     document.getElementById(event.target.id).classList.remove("is-danger");
   };
 
-  render() {    
-        this.getOwners();
-    
-    return (
+  render() {
+
+    if(this.isLoad){
+      return (
         <Card
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
@@ -177,6 +181,11 @@ class LogInLinkMail extends Component {
             </Card.Footer>
         </Card>
     );
+    }else{
+      return(<div>Loading...</div>);
+      
+    }
+    
   }
 }
 

@@ -5,7 +5,7 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Users from './components/users/userList';
 import LogIn from './components/auth/LogIn';
-import LogInLinkMail from './components/auth/LogIn';
+import LogInLinkMail from './components/auth/LogInMail';
 import Register from './components/auth/Register';
 import ForgotPassword from './components/auth/ForgotPassword';
 import ForgotPasswordVerification from './components/auth/ForgotPasswordVerification';
