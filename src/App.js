@@ -27,6 +27,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      isEmail:false,
       isAuthenticated: false,
       isAuthenticating: true,
       user: null
@@ -44,31 +45,21 @@ class App extends Component {
   
   componentDidMount() {
     if (app.auth().isSignInWithEmailLink(window.location.href)) {
-      // Additional state parameters can also be passed via URL.
-      // This can be used to continue the user's intended action before triggering
-      // the sign-in operation.
-      // Get the email if available. This should be available if the user completes
-      // the flow on the same device where they started it.
+
       var email = window.localStorage.getItem('emailForSignIn');
       if (!email) {
-        // User opened the link on a different device. To prevent session fixation
-        // attacks, ask the user to provide the associated email again. For example:
+
         email = window.prompt('Please provide your email for confirmation');
       }
-      // The client SDK will parse the code from the link for you.
       app.auth().signInWithEmailLink(email, window.location.href)
         .then((result) => {
-          // Clear email from storage.
+
+          this.setState({isEmail: true});
           window.localStorage.removeItem('emailForSignIn');
-          // You can access the new user via result.user
-          // Additional user info profile not available via:
-          // result.additionalUserInfo.profile == null
-          // You can check if the user is new or existing:
-          // result.additionalUserInfo.isNewUser
+
         })
         .catch((error) => {
-          // Some error occurred, you can inspect the code: error.code
-          // Common errors could be invalid email and invalid or expired OTPs.
+
         });
     }
 
@@ -93,11 +84,13 @@ class App extends Component {
   render() {
     const authProps = {
       isAuthenticated: this.state.isAuthenticated,
+      isEmail:this.state.isEmail,
       user: this.state.user,
       setAuthStatus: this.setAuthStatus,
       setUser: this.setUser
     }
-    if(this.state.isAuthenticated){
+    console.log(this.state.isEmail);
+    if(!this.state.isEmail){
       return(<div className="App">
         <Router>
           <div>
@@ -127,12 +120,7 @@ class App extends Component {
             <Navbar auth={authProps} />
             <Switch>
               <Route exact path="/" render={(props) => <Home {...props} auth={authProps} />} />
-              <Route exact path="/login" render={(props) => <LogIn {...props} auth={authProps} />} />
-              <Route exact path="/register" render={(props) => <Register {...props} auth={authProps} />} />
-              <Route exact path="/forgotpassword" render={(props) => <ForgotPassword {...props} auth={authProps} />} />
-              <Route exact path="/forgotpasswordverification" render={(props) => <ForgotPasswordVerification {...props} auth={authProps} />} />
-              <Route exact path="/changepassword" render={(props) => <ChangePassword {...props} auth={authProps} />} />
-              <Route exact path="/changepasswordconfirmation" render={(props) => <ChangePasswordConfirm {...props} auth={authProps} />} />
+              <Route exact path="/carlistuser" render={(props) => <VehicleListUser {...props} auth ={authProps} />} />
             </Switch>
             <Footer />
           </div>
